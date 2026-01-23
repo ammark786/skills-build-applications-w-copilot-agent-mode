@@ -27,9 +27,10 @@ DEBUG = True
 
 
 import os
-ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1']
-if os.environ.get('CODESPACE_NAME'):
-    ALLOWED_HOSTS.append(f"{os.environ.get('CODESPACE_NAME')}-8000.app.github.dev")
+CODESPACE_NAME = os.environ.get('CODESPACE_NAME')
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+if CODESPACE_NAME:
+    ALLOWED_HOSTS.append(f"{CODESPACE_NAME}-8000.app.github.dev")
 
 
 # Application definition
@@ -85,17 +86,17 @@ WSGI_APPLICATION = 'octofit_tracker.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
+
+# MongoDB Atlas connection
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'octofit_db',
+        'NAME': 'octofit_db',  # You can change this to your preferred db name
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
-            'host': 'mongodb://localhost:27017',
-            'port': 27017,
-            'username': '',
-            'password': '',
-            'authSource': 'admin',
+            'host': 'mongodb+srv://ammarkhanqa_db_user:6tbabhGjrmb7NkTI@clusteragent.xxyepbg.mongodb.net/octofit_db?retryWrites=true&w=majority',
+            'username': 'ammarkhanqa_db_user',
+            'password': '6tbabhGjrmb7NkTI',
         }
     }
 }
